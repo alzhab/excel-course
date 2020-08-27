@@ -1,0 +1,44 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "plugin:import/recommended",
+    "google"
+  ],
+  "rules": {
+    "semi": 0,
+    "no-mixed-spaces-and-tabs": 0, // disable rule
+    "indent": [2, "tab"],
+    "arrow-parens": 0,
+    "no-tabs": 0,
+    "comma-dangle": 0,
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": false,
+        "MethodDefinition": false,
+        "ClassDeclaration": false,
+        "ArrowFunctionExpression": false,
+        "FunctionExpression": false
+      }
+    }],
+    "operator-linebreak": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack.config.js"
+      },
+      "alias": {
+        "map": [
+          ["@", "src"],
+          ["@core", "src/core"]
+        ]
+      },
+      "extensions": [".js", ".scss"]
+    }
+  }
+}
