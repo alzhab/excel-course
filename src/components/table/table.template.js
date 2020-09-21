@@ -4,7 +4,7 @@ import {parse} from '@core/parse'
 
 const CODES = {
 	A: 65,
-	Z: 90
+	Z: 90,
 }
 
 const DEFAULT_WIDTH = 120
@@ -25,7 +25,7 @@ function toCell(state, row) {
 		const data = state.dataState[id]
 		const styles = toInlineStyles({
 			...defaultStyles,
-			...state.stylesState[id]
+			...state.stylesState[id],
 		})
 		return `
       <div 
@@ -81,7 +81,7 @@ function toChar(_, index) {
 function withWidthFrom(state) {
 	return function(col, index) {
 		return {
-			col, index, width: getWidth(state.colState, index)
+			col, index, width: getWidth(state.colState, index),
 		}
 	}
 }

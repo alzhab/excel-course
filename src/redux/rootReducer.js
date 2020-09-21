@@ -3,13 +3,12 @@ import {
 	CHANGE_STYLES,
 	CHANGE_TEXT,
 	CHANGE_TITLE,
-	TABLE_RESIZE
+	TABLE_RESIZE, UPDATE_DATE,
 } from './types'
 
 export function rootReducer(state, action) {
 	let field
 	let val
-	// console.log('Action: ', action)
 	switch (action.type) {
 	case TABLE_RESIZE:
 		field = action.data.type === 'col' ? 'colState' : 'rowState'
@@ -22,30 +21,27 @@ export function rootReducer(state, action) {
 			[field]: value(state, field, action),
 		}
 	case CHANGE_STYLES:
-		return {
-			...state,
-			currentStyles: action.data,
-		}
+		return {...state, currentStyles: action.data}
 	case APPLY_STYLE:
 		field = 'stylesState'
-		val = state[field] || {};
+		val = state[field] || {}
 		action.data.ids.forEach(id => {
 			val[id] = {...val[id], ...action.data.value}
 		})
 		return {
 			...state,
 			[field]: val,
-			currentStyles: {...state.currentStyles, ...action.data.value}
+			currentStyles: {...state.currentStyles, ...action.data.value},
 		}
 	case CHANGE_TITLE:
-		return {
-			...state,
-			title: action.data
-		}
+		return {...state, title: action.data}
+	case UPDATE_DATE:
+		return {...state, openedDate: new Date().toJSON()}
 	default:
 		return state
 	}
 }
+
 
 function value(state, field, action) {
 	const val = state[field] || {}

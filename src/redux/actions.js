@@ -3,7 +3,8 @@ import {
 	CHANGE_STYLES,
 	CHANGE_TEXT,
 	CHANGE_TITLE,
-	TABLE_RESIZE
+	TABLE_RESIZE,
+	UPDATE_DATE,
 } from './types'
 
 // Action Creator
@@ -28,6 +29,7 @@ export function changeStyles(data) {
 	}
 }
 
+// value, ids
 export function applyStyle(data) {
 	return {
 		type: APPLY_STYLE,
@@ -38,6 +40,12 @@ export function applyStyle(data) {
 export function changeTitle(data) {
 	return {
 		type: CHANGE_TITLE,
-		data
+		data,
+	}
+}
+
+export function updateDate() {
+	return {
+		type: UPDATE_DATE,
 	}
 }

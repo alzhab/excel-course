@@ -8,7 +8,7 @@ export function createStore(rootReducer, initialState = {}) {
 			return {
 				unsubscribe() {
 					listeners = listeners.filter(l => l !== fn)
-				},
+				}
 			}
 		},
 		dispatch(action) {
@@ -17,7 +17,7 @@ export function createStore(rootReducer, initialState = {}) {
 		},
 		getState() {
 			return JSON.parse(JSON.stringify(state))
-		},
+		}
 	}
 }
 
