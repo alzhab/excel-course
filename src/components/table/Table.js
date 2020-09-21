@@ -15,7 +15,7 @@ export class Table extends ExcelComponent {
   	super($root, {
   		name: 'Table',
   		listeners: ['mousedown', 'keydown', 'input'],
-  		...options
+  		...options,
   	})
   }
 
@@ -47,7 +47,7 @@ export class Table extends ExcelComponent {
   		this.selection.applyStyle(value)
   		this.$dispatch(actions.applyStyle({
   			value,
-  			ids: this.selection.selectedIds
+  			ids: this.selection.selectedIds,
   		}))
   	})
   }
@@ -90,7 +90,7 @@ export class Table extends ExcelComponent {
   		'ArrowLeft',
   		'ArrowRight',
   		'ArrowDown',
-  		'ArrowUp'
+  		'ArrowUp',
   	]
 
   	const {key} = event
@@ -106,7 +106,7 @@ export class Table extends ExcelComponent {
   updateTextInStore(value) {
   	this.$dispatch(actions.changeText({
   		id: this.selection.current.id(),
-  		value
+  		value,
   	}))
   }
 

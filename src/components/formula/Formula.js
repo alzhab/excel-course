@@ -9,7 +9,7 @@ export class Formula extends ExcelComponent {
   		name: 'Formula',
   		listeners: ['input', 'keydown'],
   		subscribe: ['currentText'],
-  		...options
+  		...options,
   	})
   }
 

@@ -6,6 +6,10 @@ export class TableSelection {
   	this.current = null
   }
 
+  get selectedIds() {
+  	return this.group.map($el => $el.id())
+  }
+
   select($el) {
   	this.clear()
   	$el.focus().addClass(TableSelection.className)
@@ -16,10 +20,6 @@ export class TableSelection {
   clear() {
   	this.group.forEach($el => $el.removeClass(TableSelection.className))
   	this.group = []
-  }
-
-  get selectedIds() {
-  	return this.group.map($el => $el.id())
   }
 
   selectGroup($group = []) {

@@ -13,8 +13,13 @@ class Dom {
 		return this.$el.outerHTML.trim()
 	}
 
+	clear() {
+		this.html('')
+		return this
+	}
+
 	text(text) {
-		if (typeof text === 'string') {
+		if (typeof text !== 'undefined') {
 			this.$el.textContent = text
 			return this
 		}
@@ -22,11 +27,6 @@ class Dom {
 			return this.$el.value.trim()
 		}
 		return this.$el.textContent.trim()
-	}
-
-	clear() {
-		this.html('')
-		return this
 	}
 
 	on(eventType, callback) {
@@ -91,7 +91,7 @@ class Dom {
 			const parsed = this.id().split(':')
 			return {
 				row: +parsed[0],
-				col: +parsed[1],
+				col: +parsed[1]
 			}
 		}
 		return this.data.id
