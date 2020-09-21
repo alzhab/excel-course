@@ -57,14 +57,12 @@
     color: #111;
     white-space: nowrap;
     outline: none;
-    overflow: hidden;
 
 
     &.selected {
-      overflow: initial;
-      border: 2px solid $primary-color;
-      z-index: 3;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+      border: none;
+      outline: 2px solid $primary-color;
+      z-index: 2;
     }
   }
 

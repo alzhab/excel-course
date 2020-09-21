@@ -2,16 +2,15 @@ class Dom {
 	constructor(selector) {
 		this.$el = typeof selector === 'string'
 			? document.querySelector(selector)
-			: selector;
+			: selector
 	}
 
-	html(html = '') {
+	html(html) {
 		if (typeof html === 'string') {
-			this.$el.innerHTML = html;
+			this.$el.innerHTML = html
 			return this
-		} else {
-			return this.$el.outerHTML.trim()
 		}
+		return this.$el.outerHTML.trim()
 	}
 
 	text(text) {
@@ -19,12 +18,10 @@ class Dom {
 			this.$el.textContent = text
 			return this
 		}
-
 		if (this.$el.tagName.toLowerCase() === 'input') {
 			return this.$el.value.trim()
-		} else {
-			return this.$el.textContent.trim()
 		}
+		return this.$el.textContent.trim()
 	}
 
 	clear() {
@@ -38,18 +35,6 @@ class Dom {
 
 	off(eventType, callback) {
 		this.$el.removeEventListener(eventType, callback)
-	}
-
-	id(parse) {
-		if (parse) {
-			const parsed = this.id().split(':')
-			return {
-				row: +parsed[0],
-				col: +parsed[1]
-			}
-		}
-
-		return this.data.id
 	}
 
 	find(selector) {
@@ -66,7 +51,12 @@ class Dom {
 		} else {
 			this.$el.appendChild(node)
 		}
+
 		return this
+	}
+
+	get data() {
+		return this.$el.dataset
 	}
 
 	closest(selector) {
@@ -77,68 +67,68 @@ class Dom {
 		return this.$el.getBoundingClientRect()
 	}
 
-	get data() {
-		return this.$el.dataset
-	}
-
 	findAll(selector) {
 		return this.$el.querySelectorAll(selector)
 	}
 
 	css(styles = {}) {
-		for (const key in styles) {
-			if (styles.hasOwnProperty(key)) {
+		Object
+			.keys(styles)
+			.forEach(key => {
 				this.$el.style[key] = styles[key]
+			})
+	}
+
+	getStyles(styles = []) {
+		return styles.reduce((res, s) => {
+			res[s] = this.$el.style[s]
+			return res
+		}, {})
+	}
+
+	id(parse) {
+		if (parse) {
+			const parsed = this.id().split(':')
+			return {
+				row: +parsed[0],
+				col: +parsed[1],
 			}
 		}
-	}
-
-	addClass(cl) {
-		this.$el.classList.add(cl)
-		return this
-	}
-
-	removeClass(cl) {
-		this.$el.classList.remove(cl)
-		return this
+		return this.data.id
 	}
 
 	focus() {
-		this.$el.focus();
+		this.$el.focus()
+		return this
+	}
+
+	attr(name, value) {
+		if (value) {
+			this.$el.setAttribute(name, value)
+			return this
+		}
+		return this.$el.getAttribute(name)
+	}
+
+	addClass(className) {
+		this.$el.classList.add(className)
+		return this
+	}
+
+	removeClass(className) {
+		this.$el.classList.remove(className)
 		return this
 	}
 }
 
 export function $(selector) {
-	return new Dom(selector);
+	return new Dom(selector)
 }
 
-$.create = (tagname, classes = '') => {
-	const el = document.createElement(tagname);
+$.create = (tagName, classes = '') => {
+	const el = document.createElement(tagName)
 	if (classes) {
-		el.classList = classes;
+		el.classList.add(classes)
 	}
-	return $(el);
-};
-
-
-export function nextSelection(key, {row, col}, MAX_ROW_VALUE) {
-	const MIN_VALUE = 0;
-	const MAX_COL_VALUE = 25;
-	switch (key) {
-	case 'Enter':
-	case 'ArrowDown':
-		row = row + 1 > MAX_ROW_VALUE ? 0 : row + 1
-		break;
-	case 	'Tab':
-		col = col + 1 > MAX_COL_VALUE ? 0 : col + 1
-		break;
-	case 'ArrowUp':
-		row = row - 1 < MIN_VALUE ? MIN_VALUE : row - 1
-		break;
-	}
-
-	return `[data-id="${row}:${col}"]`
+	return $(el)
 }
-
-
